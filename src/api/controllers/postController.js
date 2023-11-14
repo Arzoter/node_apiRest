@@ -17,13 +17,11 @@ exports.listAllPosts = async(req, res) => {
     // ES6
     try {
         const posts = await Post.find({});
-        res.status(200);
-        res.json(posts);
+        res.status(200).json(posts);
 
     } catch (error) {
-        res.status(500);
         console.log(error);
-        res.json({ message: "Erreur serveur." })
+        res.status(500).json({ message: "Erreur serveur." })
     }
 }
 
@@ -31,12 +29,10 @@ exports.createAPost = async (req, res) => {
     const newPost = new Post(req.body);
     try {
         const post = await newPost.save();
-        res.status(201);
-        res.json(post);
+        res.status(201).json(post);
     } catch (error) {
-        res.status(500);
         console.log(error);
-        res.json({ message: "Erreur serveur." })
+        res.status(500).json({ message: "Erreur serveur." })
     }
 }
 
@@ -44,16 +40,13 @@ exports.getAPost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.postId);
         if (!post) {
-            res.status(404);
-            res.json({ message: "Post not found." });
+            res.status(404).json({ message: "Post not found." });
             return;
         }
-        res.status(200);
-        res.json(post);
+        res.status(200).json(post);
     } catch (error) {
-        res.status(500);
         console.log(error);
-        res.json({ message: "Erreur serveur." });
+        res.status(500).json({ message: "Erreur serveur." });
     }
 };
 
@@ -65,16 +58,13 @@ exports.updatePost = async (req, res) => {
             { new: true }
         );
         if (!updatedPost) {
-            res.status(404);
-            res.json({ message: "Post not found." });
+            res.status(404).json({ message: "Post not found." });
             return;
         }
-        res.status(200);
-        res.json(updatedPost);
+        res.status(200).json(updatedPost);
     } catch (error) {
-        res.status(500);
         console.log(error);
-        res.json({ message: "Erreur serveur." });
+        res.status(500).json({ message: "Erreur serveur." });
     }
 };
   
@@ -82,15 +72,12 @@ exports.deletePost = async (req, res) => {
     try {
         const deletedPost = await Post.findByIdAndDelete(req.params.postId);
         if (!deletedPost) {
-            res.status(404);
-            res.json({ message: "Post not found." });
+            res.status(404).json({ message: "Post not found." });
             return;
         }
-        res.status(204);
-        res.json({ message: "Post deleted successfully." });
+        res.status(204).json({ message: "Post deleted successfully." });
     } catch (error) {
-        res.status(500);
         console.log(error);
-        res.json({ message: "Erreur serveur." });
+        res.status(500).json({ message: "Erreur serveur." });
     }
 };

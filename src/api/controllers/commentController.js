@@ -5,6 +5,7 @@ exports.listAllComments = async (req, res) => {
         const comments = await Comment.find({ post_id: req.params.post_id });
         res.status(200).json(comments);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: 'Server error.' });
     }
 };
@@ -15,6 +16,7 @@ exports.createAComment = async (req, res) => {
         const comment = await newComment.save();
         res.status(201).json(comment);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: 'Server error.' });
     }
 };
@@ -28,6 +30,7 @@ exports.getAComment = async (req, res) => {
         }
         res.status(200).json(comment);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: 'Server error.' });
     }
 };
@@ -45,6 +48,7 @@ exports.updateAComment = async (req, res) => {
         }
         res.status(200).json(updatedComment);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: 'Server error.' });
     }
 };
@@ -58,6 +62,7 @@ exports.deleteAComment = async (req, res) => {
         }
         res.status(204).json({ message: 'Comment deleted successfully.' });
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: 'Server error.' });
     }
 };
