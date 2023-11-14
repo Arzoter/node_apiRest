@@ -40,6 +40,23 @@ exports.createAPost = async (req, res) => {
     }
 }
 
+exports.getAPost = async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.postId);
+        if (!post) {
+            res.status(404);
+            res.json({ message: "Post not found." });
+            return;
+        }
+        res.status(200);
+        res.json(post);
+    } catch (error) {
+        res.status(500);
+        console.log(error);
+        res.json({ message: "Erreur serveur." });
+    }
+};
+
 exports.updatePost = async (req, res) => {
     try {
         const updatedPost = await Post.findByIdAndUpdate(

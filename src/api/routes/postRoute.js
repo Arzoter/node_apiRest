@@ -6,6 +6,7 @@ module.exports = (server) => {
         .post(postController.createAPost);
 
     server.route("/posts/:postId")
+        .get(postController.getAPost)
         .put(postController.updatePost)
         .delete(postController.deletePost);
 }
